@@ -47,11 +47,11 @@ public class LoginActivity extends AppCompatActivity {
                 ParseUser.logInInBackground(username, password, new LogInCallback() {
                     @Override
                     public void done(ParseUser user, ParseException e) {
-                        if (e != null){
+                        if (e != null){ // if there is an error loggin in
                             Log.e(TAG, "issue with login");
                             Toast.makeText(LoginActivity.this, "wrong username or password", Toast.LENGTH_SHORT).show();
-                            etTypePassword.setText(null);
-                            etTypeUsername.setText(null);
+                            etTypePassword.setText(null); // clear username textbox
+                            etTypeUsername.setText(null); // clear password textbox
                         }
                         else
                         {
