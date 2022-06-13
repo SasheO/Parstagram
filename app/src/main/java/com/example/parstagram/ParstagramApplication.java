@@ -25,8 +25,8 @@ public class ParstagramApplication extends Application {
         // Set applicationId and server based on the values in the Back4App settings.
         // todo: set client key and server
         Parse.initialize(new Parse.Configuration.Builder(this)
-                .applicationId("A5hMivnv5Qk2samyp4cffljIdQuhrmJikyUrKIDE")
-                .clientKey("kqOvb8kkCY5AZ7hCB44Mlpr33D8f7oEb1WSGhs7z")
+                .applicationId(getString(R.string.application_id))
+                .clientKey(getString(R.string.client_key))
                 .clientBuilder(builder)
                 .server("https://parseapi.back4app.com").build());
     }
