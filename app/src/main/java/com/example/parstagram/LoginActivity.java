@@ -50,6 +50,8 @@ public class LoginActivity extends AppCompatActivity {
                         if (e != null){
                             Log.e(TAG, "issue with login");
                             Toast.makeText(LoginActivity.this, "wrong username or password", Toast.LENGTH_SHORT).show();
+                            etTypePassword.setText(null);
+                            etTypeUsername.setText(null);
                         }
                         else
                         {
