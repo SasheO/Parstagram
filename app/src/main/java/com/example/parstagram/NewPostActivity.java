@@ -9,12 +9,12 @@ import android.view.MenuItem;
 
 import com.parse.ParseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class NewPostActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_new_post);
 
     }
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goToLoginPage(){
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent intent = new Intent(NewPostActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 }
