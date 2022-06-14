@@ -1,5 +1,6 @@
 package com.example.parstagram;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
@@ -19,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         EditText etTypeDescription = findViewById(R.id.etTypeDescription);
         Button btnTakePicture = findViewById(R.id.btnTakePicture);
         ImageView ivPicturePreview = findViewById(R.id.ivPicturePreview);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         // when user tries to take picture for post
         btnTakePicture.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +93,22 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Please type in a description for this post!", Toast.LENGTH_LONG).show();
                 }
 
+            }
+        });
+
+
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.actionHomePage:
+                        // todo: do something here
+                        return true;
+                    case R.id.actionNewPost:
+                        // todo: do something here
+                        return true;
+                    default: return true;
+                }
             }
         });
 
