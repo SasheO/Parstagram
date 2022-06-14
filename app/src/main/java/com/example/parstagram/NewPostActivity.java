@@ -45,6 +45,7 @@ public class NewPostActivity extends AppCompatActivity {
         Button btnSubmitPost = findViewById(R.id.btnSubmitPost);
         EditText etTypeDescription = findViewById(R.id.etTypeDescription);
         Button btnTakePicture = findViewById(R.id.btnTakePicture);
+        ImageView ivPicturePreview = findViewById(R.id.ivPicturePreview);
 
         // when user tries to take picture for post
         btnTakePicture.setOnClickListener(new View.OnClickListener() {
@@ -72,13 +73,14 @@ public class NewPostActivity extends AppCompatActivity {
                         @Override
                         public void done(ParseException e) {
                             if (e != null){ // if there was an exception returned while trying to save the post to server
-                                Log.e(TAG, "error encountered saving image to server: " + e.toString());
+                                Log.e(TAG, "error encountered saving post to server: " + e.toString());
                                 Toast.makeText(NewPostActivity.this, "sorry! could not upload post. try again...", Toast.LENGTH_SHORT).show();
 
                             }
                             else{ // if no error returned while trying to save post to server
                                 etTypeDescription.setText(null);
-
+                                ivPicturePreview.setVisibility(View.GONE);
+                                Toast.makeText(NewPostActivity.this, "posted!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
