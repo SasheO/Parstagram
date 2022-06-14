@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void goToNewPostActivity(){
-        Intent intent = new Intent(LoginActivity.this, NewPostActivity.class);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
     }
 }

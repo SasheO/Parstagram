@@ -34,7 +34,7 @@
         </provider>
 
         <activity
-            android:name=".NewPostActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
