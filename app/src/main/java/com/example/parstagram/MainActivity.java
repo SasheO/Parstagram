@@ -28,7 +28,7 @@ import com.parse.SaveCallback;
 import java.io.File;
 import java.util.List;
 
-public class NewPostActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "NewPostActivity";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
@@ -38,7 +38,7 @@ public class NewPostActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_post);
+        setContentView(R.layout.activity_main);
 
         queryPosts();
 
@@ -74,20 +74,20 @@ public class NewPostActivity extends AppCompatActivity {
                         public void done(ParseException e) {
                             if (e != null){ // if there was an exception returned while trying to save the post to server
                                 Log.e(TAG, "error encountered saving post to server: " + e.toString());
-                                Toast.makeText(NewPostActivity.this, "sorry! could not upload post. try again...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "sorry! could not upload post. try again...", Toast.LENGTH_SHORT).show();
 
                             }
                             else{ // if no error returned while trying to save post to server
                                 etTypeDescription.setText(null); // clear text box
                                 ivPicturePreview.setVisibility(View.GONE); // clear image box
-                                Toast.makeText(NewPostActivity.this, "posted!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "posted!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
 
                 }
                 else{ // tell user that they must type in something in the description to make a post
-                    Toast.makeText(NewPostActivity.this, "Please type in a description for this post!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Please type in a description for this post!", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -124,7 +124,7 @@ public class NewPostActivity extends AppCompatActivity {
         // wrap File object into a content provider
         // required for API >= 24
         // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
-        Uri fileProvider = FileProvider.getUriForFile(NewPostActivity.this, "com.codepath.fileprovider", photoFile);
+        Uri fileProvider = FileProvider.getUriForFile(MainActivity.this, "com.codepath.fileprovider", photoFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
 
         // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
@@ -199,7 +199,7 @@ public class NewPostActivity extends AppCompatActivity {
     }
 
     private void goToLoginPage(){
-        Intent intent = new Intent(NewPostActivity.this, LoginActivity.class);
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 }
