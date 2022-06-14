@@ -78,15 +78,15 @@ public class NewPostActivity extends AppCompatActivity {
 
                             }
                             else{ // if no error returned while trying to save post to server
-                                etTypeDescription.setText(null);
-                                ivPicturePreview.setVisibility(View.GONE);
+                                etTypeDescription.setText(null); // clear text box
+                                ivPicturePreview.setVisibility(View.GONE); // clear image box
                                 Toast.makeText(NewPostActivity.this, "posted!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
 
                 }
-                else{ // tell user that they must type in something
+                else{ // tell user that they must type in something in the description to make a post
                     Toast.makeText(NewPostActivity.this, "Please type in a description for this post!", Toast.LENGTH_LONG).show();
                 }
 
