@@ -5,9 +5,11 @@
       <map>
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.20208333333333334" />
-        <entry key="app/src/main/res/layout/activity_new_post.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_new_post.xml" value="0.21822916666666667" />
+        <entry key="app/src/main/res/layout/fragment_new_post.xml" value="0.1" />
         <entry key="app/src/main/res/layout/main_menu.xml" value="0.21822916666666667" />
+        <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.1" />
       </map>
     </option>
