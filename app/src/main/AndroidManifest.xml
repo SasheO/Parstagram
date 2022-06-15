@@ -25,7 +25,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Parstagram"
         tools:targetApi="31">
-
+        <activity
+            android:name=".PostDetailsActivity"
+            android:exported="false" />
         <!-- configuring files for sharing using: https://guides.codepath.org/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher -->
         <provider
             android:name="androidx.core.content.FileProvider"
