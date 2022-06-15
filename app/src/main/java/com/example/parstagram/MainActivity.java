@@ -36,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
     private File photoFile;
     public String photoFileName = "photo.jpg";
+    Button btnSubmitPost;
+    EditText etTypeDescription;
+    Button btnTakePicture;
+    ImageView ivPicturePreview;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +49,12 @@ public class MainActivity extends AppCompatActivity {
 
         queryPosts();
 
-        Button btnSubmitPost = findViewById(R.id.btnSubmitPost);
-        EditText etTypeDescription = findViewById(R.id.etTypeDescription);
-        Button btnTakePicture = findViewById(R.id.btnTakePicture);
-        ImageView ivPicturePreview = findViewById(R.id.ivPicturePreview);
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        btnSubmitPost = findViewById(R.id.btnSubmitPost);
+        etTypeDescription = findViewById(R.id.etTypeDescription);
+        btnTakePicture = findViewById(R.id.btnTakePicture);
+        ivPicturePreview = findViewById(R.id.ivPicturePreview);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+
 
         // when user tries to take picture for post
         btnTakePicture.setOnClickListener(new View.OnClickListener() {
@@ -62,37 +68,7 @@ public class MainActivity extends AppCompatActivity {
         btnSubmitPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // ensure that user has given a description (error handling)
-                String description = etTypeDescription.getText().toString();
-                if (description.length() > 0){
-                    Post newPost = new Post();
-                    // get current user
-                    ParseUser curr_user = ParseUser.getCurrentUser();
-                    newPost.setUser(curr_user);
-                    newPost.setDescription(description);
-
-                    // save new post to server
-                    newPost.saveInBackground(new SaveCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            if (e != null){ // if there was an exception returned while trying to save the post to server
-                                Log.e(TAG, "error encountered saving post to server: " + e.toString());
-                                Toast.makeText(MainActivity.this, "sorry! could not upload post. try again...", Toast.LENGTH_SHORT).show();
-
-                            }
-                            else{ // if no error returned while trying to save post to server
-                                etTypeDescription.setText(null); // clear text box
-                                ivPicturePreview.setVisibility(View.GONE); // clear image box
-                                Toast.makeText(MainActivity.this, "posted!", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-
-                }
-                else{ // tell user that they must type in something in the description to make a post
-                    Toast.makeText(MainActivity.this, "Please type in a description for this post!", Toast.LENGTH_LONG).show();
-                }
-
+                submitPost();
             }
         });
 
@@ -114,6 +90,39 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void submitPost() {
+        // ensure that user has given a description (error handling)
+        String description = etTypeDescription.getText().toString();
+        if (description.length() > 0){
+            Post newPost = new Post();
+            // get current user
+            ParseUser curr_user = ParseUser.getCurrentUser();
+            newPost.setUser(curr_user);
+            newPost.setDescription(description);
+
+            // save new post to server
+            newPost.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e != null){ // if there was an exception returned while trying to save the post to server
+                        Log.e(TAG, "error encountered saving post to server: " + e.toString());
+                        Toast.makeText(MainActivity.this, "sorry! could not upload post. try again...", Toast.LENGTH_SHORT).show();
+
+                    }
+                    else{ // if no error returned while trying to save post to server
+                        etTypeDescription.setText(null); // clear text box
+                        ivPicturePreview.setVisibility(View.GONE); // clear image box
+                        Toast.makeText(MainActivity.this, "posted!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        }
+        else{ // tell user that they must type in something in the description to make a post
+            Toast.makeText(MainActivity.this, "Please type in a description for this post!", Toast.LENGTH_LONG).show();
+        }
+    }
+
     // Returns the File for a photo stored on disk given the fileName
     public File getPhotoFileUri(String fileName) {
         // Get safe storage directory for photos
@@ -133,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void launchCamera() {
-        // todo: launch the camera with an intent, designating a file path, and handle the onActivityResult.
         // guide here: https://guides.codepath.org/android/Accessing-the-Camera-and-Stored-Media
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
