@@ -48,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameLayout, new FeedFragment());
+        ft.commit();
+
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -55,17 +60,17 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.actionHomePage:
-                        // todo: do something here
+                        // this replaces the fragment housed in frameLayout with a feedfragment
                         ft.replace(R.id.frameLayout, new FeedFragment());
                         ft.commit();
                         return true;
                     case R.id.actionNewPost:
-                        // todo: do something here
+                        // this replaces the fragment housed in frameLayout with a postfragment
                         ft.replace(R.id.frameLayout, new NewPostFragment());
                         ft.commit();
                         return true;
-                    case R.id.actioViewProfile:
-                        // todo: do something here
+                    case R.id.actionViewProfile:
+                        // todo: replace fragment with ViewProfileFragment
 //                        ft.replace(R.id.frameLayout, new ViewProfileFragment());
 //                        ft.commit();
                         return true;
