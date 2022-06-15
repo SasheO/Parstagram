@@ -39,6 +39,7 @@ public class PostAdapter extends
 
         // Return a new holder instance
         ViewHolder viewHolder = new ViewHolder(postView);
+
         return viewHolder;
     }
 
@@ -48,6 +49,9 @@ public class PostAdapter extends
         Post post = postList.get(position);
 
         holder.bind(post);
+
+        holder.itemView.setClickable(true);
+
     }
 
     @Override
@@ -70,7 +74,7 @@ public class PostAdapter extends
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);
-
+            itemView.setOnClickListener(this);
             tvPostDescription = (TextView) itemView.findViewById(R.id.tvPostDescription);
             tvPostUsername = (TextView) itemView.findViewById(R.id.tvPostUsername);
             ivPostImage = (ImageView) itemView.findViewById(R.id.ivPostImage);
@@ -92,16 +96,19 @@ public class PostAdapter extends
         @Override
         public void onClick(View v) {
             Toast.makeText(context, "clicked post", Toast.LENGTH_LONG).show();
-            // todo: implement intent to go to Post details activity
-//            int position = getAdapterPosition();
-//            if (position != RecyclerView.NO_POSITION) {
-//                Movie movie = movies.get(position);
-//                Intent intent = new Intent(context, MovieDetailsActivity.class);
-//                intent.putExtra(Movie.class.getSimpleName(), Parcels.wrap(movie));
-//                context.startActivity(intent);
-//            }
+            // todo: implement intent to go to Post details activity, pass in post as intent
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Post post = postList.get(position);
+
+                Intent intent = new Intent(context, PostDetailsActivity.class);
+                intent.putExtra("post", post);
+                context.startActivity(intent);
+            }
         }
+
     }
+
     public void clear() {
         postList.clear();
         notifyDataSetChanged();
