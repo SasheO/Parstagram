@@ -87,4 +87,15 @@ public class PostAdapter extends
             }
         }
     }
+    public void clear() {
+        postList.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<Post> list) {
+        postList.addAll(list);
+        notifyDataSetChanged();
+    }
+
 }

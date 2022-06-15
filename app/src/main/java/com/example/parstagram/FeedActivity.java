@@ -3,6 +3,7 @@ package com.example.parstagram;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,7 @@ public class FeedActivity extends AppCompatActivity {
     List<Post> postList;
     protected PostAdapter adapter;
     public static final String TAG = "FeedActivity";
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class FeedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_feed);
 
         rvFeed = findViewById(R.id.rvFeed);
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         postList = new ArrayList<>();
         adapter = new PostAdapter(this, postList);
 
@@ -35,7 +38,24 @@ public class FeedActivity extends AppCompatActivity {
         rvFeed.setLayoutManager(new LinearLayoutManager(this));
         // query posts from Parstagram
         queryPosts();
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                queryPosts();
+                swipeContainer.setRefreshing(false);
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
     }
+
 
     private void queryPosts() {
         // specify what type of data we want to query - Post.class
@@ -56,6 +76,7 @@ public class FeedActivity extends AppCompatActivity {
                 else{
                     // then getting posts from the database was successful\
                     // log the description of each post
+                    adapter.clear();
                     postList.addAll(posts);
                     adapter.notifyDataSetChanged();
                 }
