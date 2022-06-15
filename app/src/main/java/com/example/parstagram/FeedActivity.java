@@ -71,11 +71,14 @@ public class FeedActivity extends AppCompatActivity {
             @Override
             public void done(List<Post> posts, ParseException e) {
                 if (e != null){
-                    Log.e(TAG, "error retrieving posts", e);
+                    Log.e(TAG, "error retrieving posts " + e.toString());
                 }
                 else{
                     // then getting posts from the database was successful\
                     // log the description of each post
+                    for (Post post : posts){
+                        Log.i(TAG, "post description:" + post.getDescription().toString());
+                    }
                     adapter.clear();
                     postList.addAll(posts);
                     adapter.notifyDataSetChanged();
