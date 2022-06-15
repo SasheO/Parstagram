@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.parse.ParseFile;
 
 import java.util.List;
 
@@ -74,14 +75,14 @@ public class PostAdapter extends
         }
 
         private void bind(Post post) {
+            // Bind the post data to the view elements
             tvPostDescription.setText(post.getDescription());
             tvPostUsername.setText(post.getUser().getUsername());
-            if (post.getImage() != null) {
-                // set the image
-                Glide.with(context).load(post.getImage().getUrl()).into(ivPostImage);
+            ParseFile image = post.getImage();
+            if (image != null) {
+                Glide.with(context).load(image.getUrl()).into(ivPostImage);
             }
             else{
-                // make the imageView invisible so that it doesn't cause issues in the layout of the page
                 ivPostImage.setVisibility(View.GONE);
             }
         }
