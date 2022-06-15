@@ -3,6 +3,7 @@ package com.example.parstagram;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -28,6 +29,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,20 +43,24 @@ public class MainActivity extends AppCompatActivity {
     Button btnTakePicture;
     ImageView ivPicturePreview;
     BottomNavigationView bottomNavigationView;
+    List<Post> postList;
+    RecyclerView rvFeed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        queryPosts();
 
         btnSubmitPost = findViewById(R.id.btnSubmitPost);
         etTypeDescription = findViewById(R.id.etTypeDescription);
         btnTakePicture = findViewById(R.id.btnTakePicture);
         ivPicturePreview = findViewById(R.id.ivPicturePreview);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        rvFeed = findViewById(R.id.rvFeed);
 
+        // initialize the array that will hold posts and create a PostsAdapter
+        postList = new ArrayList<>();
 
         // when user tries to take picture for post
         btnTakePicture.setOnClickListener(new View.OnClickListener() {
@@ -79,9 +85,12 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.actionHomePage:
                         // todo: do something here
+                        Intent intent = new Intent(MainActivity.this, FeedActivity.class);
+                        startActivity(intent);
                         return true;
                     case R.id.actionNewPost:
                         // todo: do something here
+
                         return true;
                     default: return true;
                 }
@@ -180,26 +189,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void queryPosts() {
-        // Specify which class to query
-        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        query.include(Post.KEY_USER); // not sure what this does, look it up
-        query.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> posts, ParseException e) {
-                if (e != null){
-                    Log.e(TAG, "error retrieving posts", e);
-                }
-                else{
-                    // then getting posts from the database was successful\
-                    // log the description of each post
-                    for (Post post : posts){
-                        Log.i(TAG, post.getDescription() + ", username: " + post.getUser().getUsername());
-                    }
-                }
-            }
-        });
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
