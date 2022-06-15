@@ -1,11 +1,13 @@
 package com.example.parstagram;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,7 +57,7 @@ public class PostAdapter extends
 
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public TextView tvPostUsername;
@@ -85,6 +87,19 @@ public class PostAdapter extends
             else{
                 ivPostImage.setVisibility(View.GONE);
             }
+        }
+
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(context, "clicked post", Toast.LENGTH_LONG).show();
+            // todo: implement intent to go to Post details activity
+//            int position = getAdapterPosition();
+//            if (position != RecyclerView.NO_POSITION) {
+//                Movie movie = movies.get(position);
+//                Intent intent = new Intent(context, MovieDetailsActivity.class);
+//                intent.putExtra(Movie.class.getSimpleName(), Parcels.wrap(movie));
+//                context.startActivity(intent);
+//            }
         }
     }
     public void clear() {
