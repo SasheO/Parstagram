@@ -3,6 +3,7 @@ package com.example.parstagram;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -56,12 +57,15 @@ public class PostDetailsActivity extends AppCompatActivity {
         btnComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                composeComment();
+                composeComment(post);
             }
         });
     }
 
-    private void composeComment() {
+    private void composeComment(Post post) {
         // todo: this should create an intent to a comment activity that will return a comment
+        Intent intent = new Intent(PostDetailsActivity.this, ComposeCommentActivity.class);
+        intent.putExtra("post", post);
+        startActivity(intent);
     }
 }
