@@ -2,6 +2,8 @@ package com.example.parstagram;
 
 import android.app.Application;
 
+import com.example.parstagram.Models.Comment;
+import com.example.parstagram.Models.Post;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
@@ -15,6 +17,7 @@ public class ParseApplication extends Application {
 
         // register all classes that inherit parse
         ParseObject.registerSubclass(Post.class);
+        ParseObject.registerSubclass(Comment.class);
 
         // Use for monitoring Parse network traffic
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
