@@ -22,6 +22,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,6 +40,7 @@ public class PostDetailsActivity extends AppCompatActivity {
     List<Comment> commentList;
     CommentAdapter adapter;
     public static final String TAG = "PostDetailsActivity";
+    ParseUser CURRENT_USER = ParseUser.getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +76,18 @@ public class PostDetailsActivity extends AppCompatActivity {
             ivPostImage.setVisibility(View.GONE);
         }
 
+        // todo: 2. Ensure that if a post has been liked by a user, it shows on opening a post details activity
+        if (post.getLikedby().contains(CURRENT_USER)){
+            // set liked by to filled
+            Log.i(TAG, "post already liked by current user");
+            btnLiked.setImageResource(R.drawable.ufi_heart_active);
+        }
+
         Date createdAt = post.getCreatedAt();
         String timeAgo = Post.calculateTimeAgo(createdAt);
         tvTimestamp.setText(timeAgo);
+
+
 
         btnComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +95,21 @@ public class PostDetailsActivity extends AppCompatActivity {
                 Intent intent = new Intent(PostDetailsActivity.this, NewCommentActivity.class);
                 intent.putExtra("post", post);
                 startActivity(intent);
+            }
+        });
+
+        btnLiked.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // if current user has already liked this post
+                if (post.getLikedby().contains(CURRENT_USER)){
+                    btnLiked.setImageResource(R.drawable.ufi_heart);
+                }
+                // else add them to likedby list and like the buttonimage
+                else{
+                    btnLiked.setImageResource(R.drawable.ufi_heart_active);
+                }
+                post.updateLikedBy(CURRENT_USER);
             }
         });
     }

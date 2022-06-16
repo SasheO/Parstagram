@@ -8,16 +8,21 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 // this connects this post class to the Post class in your database
 @ParseClassName("Post")
 public class Post extends ParseObject {
 
+    public static final String TAG = "Post";
+
     // these variables store the name that will be used to send queries to Parse database
     public static final String KEY_DESCRPTION = "description";
     public static final String KEY_IMAGE = "image";
     public static final String KEY_USER = "user";
+    public static final String KEY_LIKEDBY = "LikedBy";
 
 
     public String getDescription(){
@@ -32,6 +37,13 @@ public class Post extends ParseObject {
         return getParseFile(KEY_IMAGE);
     }
 
+    public List<ParseUser> getLikedby() {
+        if(getList(KEY_LIKEDBY) == null){
+        return new ArrayList<>();
+    }
+        return getList(KEY_LIKEDBY);
+    }
+
     public void setDescription(String description){
         put(KEY_DESCRPTION, description);
     }
@@ -42,6 +54,18 @@ public class Post extends ParseObject {
 
     public void setImage(ParseFile image){
         put(KEY_IMAGE, image);
+    }
+
+    public void updateLikedBy(ParseUser current_user){
+        List<ParseUser> likedby = getLikedby();
+        // if likedBy contains current user, remove them
+        if (likedby.contains(current_user)){
+            likedby.remove(current_user);
+        }
+        else{ // else add them
+            likedby.add(current_user);
+        }
+        put(KEY_LIKEDBY, likedby);
     }
 
     public static String calculateTimeAgo(Date createdAt) {
