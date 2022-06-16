@@ -48,12 +48,12 @@
         android:layout_height="20dp"
         android:contentDescription="Timestamp textview"
         android:text="TextView"
+        android:textAlignment="textEnd"
         app:layout_constraintBottom_toBottomOf="@+id/tvPostUsername"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.943"
         app:layout_constraintStart_toEndOf="@+id/tvPostUsername"
-        app:layout_constraintTop_toTopOf="@+id/tvPostUsername"
-        android:textAlignment="textEnd"/>
+        app:layout_constraintTop_toTopOf="@+id/tvPostUsername" />
 
 
     <LinearLayout
@@ -67,8 +67,9 @@
 
         <ImageButton
             android:id="@+id/btnLiked"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="48dp"
+            android:layout_height="45dp"
+            android:scaleType="fitXY"
             android:src="@drawable/ufi_heart"
             android:text="Comment"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -80,9 +81,10 @@
 
         <ImageButton
             android:id="@+id/btnComment"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="48dp"
+            android:layout_height="45dp"
             android:layout_marginLeft="15dp"
+            android:scaleType="fitXY"
             android:src="@drawable/ufi_comment"
             android:text="Comment"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -96,8 +98,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvComments"
-        android:layout_width="409dp"
-        android:layout_height="397dp"
+        android:layout_width="408dp"
+        android:layout_height="378dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
