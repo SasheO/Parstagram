@@ -33,11 +33,10 @@
         android:id="@+id/tvPostDescription"
         android:layout_width="388dp"
         android:layout_height="21dp"
-        android:layout_marginStart="4dp"
         android:layout_marginTop="7dp"
         android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@+id/ivPostImage"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toEndOf="@+id/tvPostUsername"
+        app:layout_constraintHorizontal_bias="0.003"
         app:layout_constraintStart_toStartOf="@+id/tvPostUsername"
         app:layout_constraintTop_toBottomOf="@+id/ivPostImage"
         tools:text="post description appears here" />
