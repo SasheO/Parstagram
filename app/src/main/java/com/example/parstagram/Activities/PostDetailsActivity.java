@@ -94,7 +94,6 @@ public class PostDetailsActivity extends AppCompatActivity {
         ParseQuery<Comment> query = ParseQuery.getQuery(Comment.class);
         // include data where post is current post
         query.whereEqualTo("post", post);
-
         // limit query to latest 20 items
         query.setLimit(20);
         // order posts by creation date (newest first)
