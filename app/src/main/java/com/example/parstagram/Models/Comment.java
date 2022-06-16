@@ -36,4 +36,6 @@ public class Comment extends ParseObject {
     public void setPost(ParseObject post){
         put(KEY_POST, post);
     }
+
+
 }
