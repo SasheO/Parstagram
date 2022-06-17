@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.parstagram.Adapters.CommentAdapter;
-import com.example.parstagram.Adapters.PostAdapter;
 import com.example.parstagram.Models.Comment;
 import com.example.parstagram.Models.Post;
 import com.example.parstagram.R;

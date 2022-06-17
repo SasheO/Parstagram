@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.parstagram.Models.Post;
-import com.example.parstagram.Adapters.PostAdapter;
+import com.example.parstagram.Adapters.FeedPostAdapter;
 import com.example.parstagram.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -34,23 +34,14 @@ public class FeedFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     RecyclerView rvFeed;
     public List<Post> postList;
-    public PostAdapter adapter;
+    public FeedPostAdapter adapter;
     public static final String TAG = "FeedActivity";
     private SwipeRefreshLayout swipeContainer;
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
 
 
     public FeedFragment() {
         // Required empty public constructor
-    }
-
-    // TODO: Rename and change types and number of parameters
-    public static FeedFragment newInstance(String param1, String param2) {
-        FeedFragment fragment = new FeedFragment();
-
-        return fragment;
     }
 
     @Override
@@ -74,7 +65,7 @@ public class FeedFragment extends Fragment {
         rvFeed = view.findViewById(R.id.rvFeed);
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         postList = new ArrayList<>();
-        adapter = new PostAdapter(getActivity(), postList);
+        adapter = new FeedPostAdapter(getActivity(), postList);
 
         // set the adapter on the recycler view
         rvFeed.setAdapter(adapter);
