@@ -3,9 +3,11 @@ package com.example.parstagram.Models;
 import android.util.Log;
 
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -59,14 +61,16 @@ public class Post extends ParseObject {
     public void updateLikedBy(ParseUser current_user){
         List<ParseUser> likedby = getLikedby();
         // todo: change this to hassameid
-        if (likedby.contains(current_user)){
-            likedby.remove(current_user);
+        for (ParseUser user: likedby){
+            if (user.hasSameId(current_user)){
+                likedby.remove(user);
+                put(KEY_LIKEDBY, likedby);
+                Log.i(TAG, likedby.toString());
+                return;
+            }
         }
-        else{ // else add them
-            likedby.add(current_user);
-        }
+        likedby.add(current_user);
         put(KEY_LIKEDBY, likedby);
-        Log.i(TAG, "liked by "+ getLikedby().toString());
     }
 
     public static String calculateTimeAgo(Date createdAt) {

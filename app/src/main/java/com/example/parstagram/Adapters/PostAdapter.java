@@ -98,7 +98,6 @@ public class PostAdapter extends
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(context, "clicked post", Toast.LENGTH_LONG).show();
             // todo: implement intent to go to Post details activity, pass in post as intent
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
