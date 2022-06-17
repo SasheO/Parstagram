@@ -32,19 +32,19 @@ import java.util.List;
 
 public class PostDetailsActivity extends AppCompatActivity {
 
-    TextView tvTimestamp;
-    TextView tvPostUsername;
-    TextView tvPostDescription;
-    ImageView ivPostImage;
-    ImageButton btnLiked;
-    TextView tvLikeCount;
-    ImageView ivProfilePic;
-    ImageButton btnComment;
-    RecyclerView rvComments;
-    List<Comment> commentList;
-    CommentAdapter adapter;
+    private TextView tvTimestamp;
+    private TextView tvPostUsername;
+    private TextView tvPostDescription;
+    private ImageView ivPostImage;
+    private ImageButton btnLiked;
+    private TextView tvLikeCount;
+    private ImageView ivProfilePic;
+    private ImageButton btnComment;
+    private RecyclerView rvComments;
+    private List<Comment> commentList;
+    private CommentAdapter adapter;
     public static final String TAG = "PostDetailsActivity";
-    ParseUser CURRENT_USER = ParseUser.getCurrentUser();
+    private ParseUser CURRENT_USER = ParseUser.getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

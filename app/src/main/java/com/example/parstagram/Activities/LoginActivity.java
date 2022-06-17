@@ -19,12 +19,11 @@ import com.parse.ParseUser;
 public class LoginActivity extends AppCompatActivity {
 
 
-    Button btnLogin;
-    EditText etTypeUsername;
-    EditText etTypePassword;
-    TextView tvSignUp;
-
-    String TAG = "LoginActivity";
+    private Button btnLogin;
+    private EditText etTypeUsername;
+    private EditText etTypePassword;
+    private TextView tvSignUp;
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

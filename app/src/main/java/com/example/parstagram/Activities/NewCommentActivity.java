@@ -18,9 +18,9 @@ import com.parse.SaveCallback;
 
 public class NewCommentActivity extends AppCompatActivity {
 
-    EditText etTypeComment;
-    Button btnPostComment;
-    public static final String TAG = "NewCommentActivity";
+    private EditText etTypeComment;
+    private Button btnPostComment;
+    private static final String TAG = "NewCommentActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

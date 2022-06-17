@@ -18,14 +18,12 @@ import java.util.List;
 @ParseClassName("Post")
 public class Post extends ParseObject {
 
-    public static final String TAG = "Post";
-
     // these variables store the name that will be used to send queries to Parse database
-    public static final String KEY_DESCRPTION = "description";
-    public static final String KEY_IMAGE = "image";
-    public static final String KEY_USER = "user";
-    public static final String KEY_LIKEDBY = "LikedBy";
-
+    private static final String KEY_DESCRPTION = "description";
+    private static final String KEY_IMAGE = "image";
+    public static final String KEY_USER = "user"; // public bc this is referred to in another class
+    private static final String KEY_LIKEDBY = "LikedBy";
+    private static final String TAG = "Post";
 
     public String getDescription(){
         return getString(KEY_DESCRPTION);

@@ -39,17 +39,17 @@ public class NewPostFragment extends Fragment {
     // either dynamically or via XML layout inflation.
 
     private static final String TAG = "NewPostActivity";
-    public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
+    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
     private File photoFile;
     public String photoFileName = "photo.jpg";
-    Button btnSubmitPost;
-    EditText etTypeDescription;
-    Button btnTakePicture;
-    ImageView ivPicturePreview;
-    BottomNavigationView bottomNavigationView;
-    List<Post> postList;
-    RecyclerView rvFeed;
-    MainActivity currentactivity;
+    private Button btnSubmitPost;
+    private EditText etTypeDescription;
+    private Button btnTakePicture;
+    private ImageView ivPicturePreview;
+    private BottomNavigationView bottomNavigationView;
+    private List<Post> postList;
+    private RecyclerView rvFeed;
+    private MainActivity currentactivity;
 
     public NewPostFragment(MainActivity mainActivity) {
         currentactivity = mainActivity;
