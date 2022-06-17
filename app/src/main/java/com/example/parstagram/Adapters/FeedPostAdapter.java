@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,14 +20,14 @@ import com.parse.ParseFile;
 
 import java.util.List;
 
-public class PostAdapter extends
-        RecyclerView.Adapter<PostAdapter.ViewHolder> {
+public class FeedPostAdapter extends
+        RecyclerView.Adapter<FeedPostAdapter.ViewHolder> {
 
     public static List<Post> postList;
     Context context;
 
     // constructor to set context
-    public PostAdapter(Context context, List<Post> postList) {
+    public FeedPostAdapter(Context context, List<Post> postList) {
         this.context = context;
         this.postList = postList;
     }
@@ -39,7 +38,7 @@ public class PostAdapter extends
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View postView = inflater.inflate(R.layout.post_item, parent, false);
+        View postView = inflater.inflate(R.layout.feed_post_item, parent, false);
 
         // Return a new holder instance
         ViewHolder viewHolder = new ViewHolder(postView);
@@ -104,15 +103,11 @@ public class PostAdapter extends
             if (profilepic != null){
                 Glide.with(context).load(profilepic.getUrl()).transform(new CircleCrop()).into(ivUserProfilePic);
             }
-
-
-
-            // todo: if there is a user profile pic, bind the profile pic to ivprofilepic
         }
 
         @Override
         public void onClick(View v) {
-            // todo: implement intent to go to Post details activity, pass in post as intent
+            // implement intent to go to Post details activity, pass in post as intent
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
                 Post post = postList.get(position);
