@@ -136,8 +136,6 @@ public class PostDetailsActivity extends AppCompatActivity {
         // this is necessary to include non-primitive types when querying
         query.include("user");
         query.include("post");
-        // limit query to latest 20 items
-        query.setLimit(20);
         // order posts by creation date (newest first)
         query.addDescendingOrder("createdAt");
         // start an asynchronous call for posts
