@@ -73,6 +73,16 @@ public class Post extends ParseObject {
         put(KEY_LIKEDBY, likedby);
     }
 
+
+    public boolean isLikedBy(ParseUser current_user){
+        for (ParseUser user: getLikedby()){
+            if (user.hasSameId(current_user)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static String calculateTimeAgo(Date createdAt) {
 
         int SECOND_MILLIS = 1000;
