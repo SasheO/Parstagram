@@ -25,6 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:backgroundTint="#A19F9F"
         android:contentDescription="username"
         android:ems="10"
         android:hint="username"
