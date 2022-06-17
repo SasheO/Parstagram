@@ -9,10 +9,8 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.parstagram.Adapters.FeedPostAdapter;
 import com.example.parstagram.Adapters.ProfilePostAdapter;
 import com.example.parstagram.Models.Post;
 import com.example.parstagram.R;
@@ -24,7 +22,7 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfileFragment extends Fragment {
+public class CurrentUserProfileFragment extends Fragment {
 
     public static final String TAG = "ProfileFragment";
     RecyclerView rvProfilePosts;
@@ -33,12 +31,12 @@ public class ProfileFragment extends Fragment {
     TextView tvUsername;
 
     // required empty constructor
-    public ProfileFragment(){}
+    public CurrentUserProfileFragment(){}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_profile, parent, false);
+        return inflater.inflate(R.layout.fragment_current_user_profile, parent, false);
     }
 
     // This event is triggered soon after onCreateView().

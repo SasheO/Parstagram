@@ -2,21 +2,25 @@ package com.example.parstagram.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.example.parstagram.Activities.MainActivity;
 import com.example.parstagram.Activities.PostDetailsActivity;
 import com.example.parstagram.Models.Post;
 import com.example.parstagram.R;
 import com.parse.ParseFile;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -24,11 +28,13 @@ public class FeedPostAdapter extends
         RecyclerView.Adapter<FeedPostAdapter.ViewHolder> {
 
     public static List<Post> postList;
-    Context context;
+    // have to set the context as a MainActivity, not a generic context so that we can refer to MainActivity functions later on in the adapter
+    MainActivity context;
+    public static final String TAG = "FeedPostAdapter";
 
     // constructor to set context
     public FeedPostAdapter(Context context, List<Post> postList) {
-        this.context = context;
+        this.context = (MainActivity) context;
         this.postList = postList;
     }
 
@@ -89,6 +95,7 @@ public class FeedPostAdapter extends
 
         private void bind(Post post) {
             // Bind the post data to the view elements
+            ivUserProfilePic.setClickable(true);
             tvPostDescription.setText(post.getDescription());
             tvPostUsername.setText(post.getUser().getUsername());
             tvLikeCount.setText(post.getStringNumLikes());
@@ -103,10 +110,33 @@ public class FeedPostAdapter extends
             if (profilepic != null){
                 Glide.with(context).load(profilepic.getUrl()).transform(new CircleCrop()).into(ivUserProfilePic);
             }
+
+
+            // this is so that if the profile image is clicked, it opens a profile
+            // todo: if profile picture is clicked, launch an intent to a profile activity or profile tab
+            ivUserProfilePic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (post.getUser().hasSameId(ParseUser.getCurrentUser())){
+                        Log.i(TAG, "user profile photo clicked is current user");
+                        // go to the profile tab. i got this line of code from stack overflow: https://stackoverflow.com/questions/12142255/call-activity-method-from-adapter
+                        if (context instanceof MainActivity) {
+                            Log.i(TAG, "launching profile fragment");
+                            ((MainActivity)context).launchProfileFragment();
+                        }
+                    }
+                    else{
+                        // launch an intent to a profile of the user
+                    }
+//                    Toast.makeText(context, "This profile was clicked", Toast.LENGTH_LONG).show();
+                }
+            });
         }
 
         @Override
         public void onClick(View v) {
+
+
             // implement intent to go to Post details activity, pass in post as intent
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {

@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.parstagram.Activities.MainActivity;
 import com.example.parstagram.Models.Post;
 import com.example.parstagram.Adapters.FeedPostAdapter;
 import com.example.parstagram.R;
@@ -37,8 +38,6 @@ public class FeedFragment extends Fragment {
     public FeedPostAdapter adapter;
     public static final String TAG = "FeedActivity";
     private SwipeRefreshLayout swipeContainer;
-
-
 
     public FeedFragment() {
         // Required empty public constructor
