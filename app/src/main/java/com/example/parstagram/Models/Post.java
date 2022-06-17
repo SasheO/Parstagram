@@ -58,7 +58,7 @@ public class Post extends ParseObject {
 
     public void updateLikedBy(ParseUser current_user){
         List<ParseUser> likedby = getLikedby();
-        // todo: change this to hassameid
+        // todo: change this to hasSameId
         if (likedby.contains(current_user)){
             likedby.remove(current_user);
         }

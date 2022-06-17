@@ -52,33 +52,33 @@
         android:layout_width="211dp"
         android:layout_height="42dp"
         android:layout_marginTop="16dp"
-        android:text="LOGIN"
+        android:text="Sign Up"
         app:layout_constraintEnd_toEndOf="@id/etTypePassword"
         app:layout_constraintStart_toStartOf="@id/etTypePassword"
         app:layout_constraintTop_toBottomOf="@+id/etTypePassword" />
 
     <TextView
-        android:id="@+id/tvSignUpMessage"
+        android:id="@+id/tvLoginMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="108dp"
         android:layout_marginBottom="16dp"
-        android:text="Don't have an account? "
+        android:text="Already have an account? "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvSignUp"
+        android:id="@+id/tvLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:layout_marginBottom="16dp"
-        android:text="Sign up."
+        android:text="Log in."
         android:textStyle="bold"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tvSignUpMessage" />
+        app:layout_constraintStart_toEndOf="@+id/tvLoginMessage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
