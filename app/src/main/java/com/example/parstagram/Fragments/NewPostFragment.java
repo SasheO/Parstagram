@@ -1,5 +1,6 @@
 package com.example.parstagram.Fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,6 +21,7 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.parstagram.Activities.MainActivity;
 import com.example.parstagram.Models.Post;
 import com.example.parstagram.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -47,6 +49,16 @@ public class NewPostFragment extends Fragment {
     BottomNavigationView bottomNavigationView;
     List<Post> postList;
     RecyclerView rvFeed;
+    MainActivity currentactivity;
+
+    public NewPostFragment(MainActivity mainActivity) {
+        currentactivity = mainActivity;
+    }
+
+    public NewPostFragment() {
+
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -85,11 +97,13 @@ public class NewPostFragment extends Fragment {
             public void onClick(View v) {
                 submitPost();
             }
+            // todo: communicate this back to the mainactivity, so that mainactivity can send it and insert it into the feed fragment
         });
 
     }
 
-    // todo: edit this to submit post to server
+    // this submits post to server
+    // todo: communicate this back to the mainactivity, so that mainactivity can send it and insert it into the feed fragment
     private void submitPost() {
         // ensure that user has given a description (error handling)
         String description = etTypeDescription.getText().toString();
@@ -107,20 +121,29 @@ public class NewPostFragment extends Fragment {
                 public void done(ParseException e) {
                     if (e != null){ // if there was an exception returned while trying to save the post to server
                         Log.e(TAG, "error encountered saving post to server: " + e.toString());
-                        Toast.makeText(getActivity(), "sorry! could not upload post. try again...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(currentactivity, "sorry! could not upload post. try again...", Toast.LENGTH_SHORT).show();
 
                     }
                     else{ // if no error returned while trying to save post to server
+                        // todo: send the string to MainActivity then display it in FeedFragment
+                        // in MainActivity, edit the postList (insert the new post)
+                         currentactivity.feedFragment.postList.add(newPost);
+                        // in MainActivity, notify data set changed so that it shows
+                        currentactivity.feedFragment.adapter.notifyDataSetChanged();
+
+                        // the lines below clear the text and image to notify to the user that the past has been saved
                         etTypeDescription.setText(null); // clear text box
                         ivPicturePreview.setVisibility(View.GONE); // clear image box
-                        Toast.makeText(getActivity(), "posted!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(currentactivity, "posted!", Toast.LENGTH_SHORT).show();
+
+
                     }
                 }
             });
 
         }
         else{ // tell user that they must type in something in the description to make a post
-            Toast.makeText(getActivity(), "Please type in a description for this post!", Toast.LENGTH_LONG).show();
+            Toast.makeText(currentactivity, "Please type in a description for this post!", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -129,7 +152,7 @@ public class NewPostFragment extends Fragment {
         // Get safe storage directory for photos
         // Use `getExternalFilesDir` on Context to access package-specific directories.
         // This way, we don't need to request external read/write runtime permissions.
-        File mediaStorageDir = new File(getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES), TAG);
+        File mediaStorageDir = new File(currentactivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES), TAG);
 
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
@@ -152,7 +175,7 @@ public class NewPostFragment extends Fragment {
         // wrap File object into a content provider
         // required for API >= 24
         // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
-        Uri fileProvider = FileProvider.getUriForFile(getActivity(), "com.codepath.fileprovider", photoFile);
+        Uri fileProvider = FileProvider.getUriForFile(currentactivity, "com.codepath.fileprovider", photoFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
 
         // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
@@ -168,7 +191,7 @@ public class NewPostFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
-            if (resultCode == getActivity().RESULT_OK) {
+            if (resultCode == currentactivity.RESULT_OK) {
                 // by this point we have the camera photo on disk
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
                 // RESIZE BITMAP, see section below
