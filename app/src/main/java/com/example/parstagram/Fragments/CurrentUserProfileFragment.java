@@ -24,11 +24,11 @@ import java.util.List;
 
 public class CurrentUserProfileFragment extends Fragment {
 
-    public static final String TAG = "ProfileFragment";
-    RecyclerView rvProfilePosts;
+    private static final String TAG = "ProfileFragment";
+    private RecyclerView rvProfilePosts;
     private List<Post> postList;
-    ProfilePostAdapter adapter;
-    TextView tvUsername;
+    private ProfilePostAdapter adapter;
+    private TextView tvUsername;
 
     // required empty constructor
     public CurrentUserProfileFragment(){}

@@ -17,11 +17,11 @@ import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    TextView tvLogin;
-    EditText etTypeUsername;
-    EditText etTypePassword;
-    Button btnSignup;
-    public static final String TAG = "RegisterActivity";
+    private TextView tvLogin;
+    private EditText etTypeUsername;
+    private EditText etTypePassword;
+    private Button btnSignup;
+    private static final String TAG = "RegisterActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

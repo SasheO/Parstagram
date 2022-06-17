@@ -9,9 +9,9 @@ import com.parse.ParseUser;
 public class Comment extends ParseObject {
 
     // these variables store the name that will be used to send queries to Parse database
-    public static final String KEY_BODY = "body";
-    public static final String KEY_POST = "post";
-    public static final String KEY_USER = "user";
+    private static final String KEY_BODY = "body";
+    private static final String KEY_POST = "post";
+    private static final String KEY_USER = "user";
 
     public String getBody(){
         return getString(KEY_BODY);

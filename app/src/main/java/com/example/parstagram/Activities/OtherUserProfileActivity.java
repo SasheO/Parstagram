@@ -23,11 +23,11 @@ import java.util.List;
 
 public class OtherUserProfileActivity extends AppCompatActivity {
 
-    ImageView ivProfilePicture;
-    TextView tvUsername;
-    RecyclerView rvProfilePosts;
+    private ImageView ivProfilePicture;
+    private TextView tvUsername;
+    private RecyclerView rvProfilePosts;
     private List<Post> postList;
-    ProfilePostAdapter adapter;
+    private ProfilePostAdapter adapter;
     public static final String TAG = "OtherUserProfileActivity";
 
 

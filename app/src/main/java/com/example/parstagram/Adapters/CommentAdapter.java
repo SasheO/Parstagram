@@ -21,8 +21,8 @@ import java.util.List;
 public class CommentAdapter extends
         RecyclerView.Adapter<CommentAdapter.ViewHolder> {
 
-    Context context;
-    List<Comment> commentList;
+    private Context context;
+    private List<Comment> commentList;
 
     // constructor to set context
     public CommentAdapter(Context context, List<Comment> commentList) {
