@@ -62,7 +62,10 @@ List an 3rd party libraries, icons, graphics, or other assets you used in your a
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+I found that I was much more capable with debugging, solving problems and finding answers independently. I also worked much faster than on previous projects. 
+* The biggest challenges I faced were time constraints. For example, the like and comment functionality in the feed is non-functional at the moment because I did not have enough time to implement it (and it was a stretch feature). 
+* Getting fragments to communicate with the activity and each other was difficult and confusing. I think I have a better understanding of requesting resources etc. from activities after doing it with the help of the instructor and some peers. 
+* Also, I also never figured how to send back information when a user likes or unlikes a post in a Post Detail Activity, although the right calls are sent to the server. I worked on this over two or three days, working on other things intermittently.
 
 ## License
 
