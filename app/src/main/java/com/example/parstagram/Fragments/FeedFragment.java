@@ -33,8 +33,8 @@ public class FeedFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     RecyclerView rvFeed;
-    List<Post> postList;
-    protected PostAdapter adapter;
+    public List<Post> postList;
+    public PostAdapter adapter;
     public static final String TAG = "FeedActivity";
     private SwipeRefreshLayout swipeContainer;
     private static final String ARG_PARAM1 = "param1";

@@ -70,6 +70,7 @@ public class PostAdapter extends
         public TextView tvPostUsername;
         public ImageView ivPostImage;
         public TextView tvPostDescription;
+        public ImageView ivProfilePic;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -81,19 +82,21 @@ public class PostAdapter extends
             tvPostDescription = (TextView) itemView.findViewById(R.id.tvPostDescription);
             tvPostUsername = (TextView) itemView.findViewById(R.id.tvPostUsername);
             ivPostImage = (ImageView) itemView.findViewById(R.id.ivPostImage);
+//            ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
         }
 
         private void bind(Post post) {
             // Bind the post data to the view elements
             tvPostDescription.setText(post.getDescription());
             tvPostUsername.setText(post.getUser().getUsername());
-            ParseFile image = post.getImage();
-            if (image != null) {
-                Glide.with(context).load(image.getUrl()).into(ivPostImage);
+            ParseFile postimage = post.getImage();
+            if (postimage != null) {
+                Glide.with(context).load(postimage.getUrl()).into(ivPostImage);
             }
             else{
                 ivPostImage.setVisibility(View.GONE);
             }
+            // todo: if there is a user profile pic, bind the profile pic to ivprofilepic
         }
 
         @Override

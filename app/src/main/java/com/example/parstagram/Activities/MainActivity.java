@@ -2,6 +2,8 @@ package com.example.parstagram.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
@@ -17,10 +19,13 @@ import com.parse.ParseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "NewPostActivity";
+    private static final String TAG = "MainActivity";
 
     BottomNavigationView bottomNavigationView;
-
+    // these lines below are necessary to be able to refer to the fragments from another fragment via the activity
+    final FragmentManager fragmentManager = getSupportFragmentManager();
+    public NewPostFragment newPostFragment = new NewPostFragment(MainActivity.this);
+    public FeedFragment feedFragment = new FeedFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,26 +46,24 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-
+                Fragment fragment;
                 switch (item.getItemId()) {
                     case R.id.actionHomePage:
                         // this replaces the fragment housed in frameLayout with a feedfragment
-                        ft.replace(R.id.frameLayout, new FeedFragment());
-                        ft.commit();
-                        return true;
+                        fragment = feedFragment;
+                        break;
                     case R.id.actionNewPost:
                         // this replaces the fragment housed in frameLayout with a postfragment
-                        ft.replace(R.id.frameLayout, new NewPostFragment());
-                        ft.commit();
-                        return true;
+                        fragment = newPostFragment;
+                        break;
+
                     case R.id.actionViewProfile:
-                        // todo: replace fragment with ViewProfileFragment
-//                        ft.replace(R.id.frameLayout, new ViewProfileFragment());
-//                        ft.commit();
-                        return true;
-                    default: return true;
+                    default:
+                        fragment = feedFragment;
+                        break;
                 }
+                fragmentManager.beginTransaction().replace(R.id.frameLayout, fragment).commit();
+                return true;
             }
         });
 
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // if user clicks on logout button located in the menu
             case R.id.miLogout:
-                //todo: logout user
+
                 ParseUser.logOut();
                 ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
                 // go back to the login page after user is logged out
