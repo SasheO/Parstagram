@@ -109,8 +109,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="326dp"
+        android:text="0 likes"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        tools:text="like count" />
+        tools:text="number of likes" />
 </androidx.constraintlayout.widget.ConstraintLayout>
