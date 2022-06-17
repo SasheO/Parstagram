@@ -13,7 +13,7 @@ import android.view.MenuItem;
 
 import com.example.parstagram.Fragments.FeedFragment;
 import com.example.parstagram.Fragments.NewPostFragment;
-import com.example.parstagram.Fragments.ProfileFragment;
+import com.example.parstagram.Fragments.CurrentUserProfileFragment;
 import com.example.parstagram.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.ParseUser;
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     final FragmentManager fragmentManager = getSupportFragmentManager();
     public NewPostFragment newPostFragment = new NewPostFragment(MainActivity.this);
     public FeedFragment feedFragment = new FeedFragment();
-    public ProfileFragment profileFragment = new ProfileFragment();
+    public CurrentUserProfileFragment profileFragment = new CurrentUserProfileFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +73,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+        // todo: make this function
+        public void launchProfileFragment(){
+            Fragment fragment = profileFragment;
+            fragmentManager.beginTransaction().replace(R.id.frameLayout, fragment).commit();
+        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
