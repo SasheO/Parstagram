@@ -49,7 +49,7 @@ public class NewPostFragment extends Fragment {
     BottomNavigationView bottomNavigationView;
     List<Post> postList;
     RecyclerView rvFeed;
-    Activity currentactivity;
+    MainActivity currentactivity;
 
     public NewPostFragment(MainActivity mainActivity) {
         currentactivity = mainActivity;
@@ -127,8 +127,9 @@ public class NewPostFragment extends Fragment {
                     else{ // if no error returned while trying to save post to server
                         // todo: send the string to MainActivity then display it in FeedFragment
                         // in MainActivity, edit the postList (insert the new post)
-                        // currentactivity.fee
+                         currentactivity.feedFragment.postList.add(newPost);
                         // in MainActivity, notify data set changed so that it shows
+                        currentactivity.feedFragment.adapter.notifyDataSetChanged();
 
                         // the lines below clear the text and image to notify to the user that the past has been saved
                         etTypeDescription.setText(null); // clear text box
