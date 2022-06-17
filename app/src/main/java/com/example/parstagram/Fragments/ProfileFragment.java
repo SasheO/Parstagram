@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -29,6 +30,7 @@ public class ProfileFragment extends Fragment {
     RecyclerView rvProfilePosts;
     public List<Post> postList;
     ProfilePostAdapter adapter;
+    TextView tvUsername;
 
     // required empty constructor
     public ProfileFragment(){}
@@ -47,6 +49,8 @@ public class ProfileFragment extends Fragment {
 
         postList = new ArrayList<>();
         rvProfilePosts = view.findViewById(R.id.rvProfilePosts);
+        tvUsername = view.findViewById(R.id.tvUsername);
+        tvUsername.setText(ParseUser.getCurrentUser().getUsername());
         adapter = new ProfilePostAdapter(getActivity(), postList);
 
         // set the adapter on the recycler view
