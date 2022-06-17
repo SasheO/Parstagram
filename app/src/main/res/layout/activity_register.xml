@@ -22,26 +22,30 @@
 
     <EditText
         android:id="@+id/etTypeUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="336dp"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
+        android:background="@color/grey"
         android:contentDescription="username"
         android:ems="10"
         android:hint="username"
         android:inputType="textPersonName"
+        android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/etTypePassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="336dp"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
+        android:background="@color/grey"
         android:contentDescription="password"
         android:ems="10"
         android:hint="password"
         android:inputType="textPassword"
+        android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,9 +53,10 @@
 
     <Button
         android:id="@+id/btnSignup"
-        android:layout_width="211dp"
-        android:layout_height="42dp"
+        android:layout_width="336dp"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
+        android:background="@color/blue"
         android:text="Sign Up"
         app:layout_constraintEnd_toEndOf="@id/etTypePassword"
         app:layout_constraintStart_toStartOf="@id/etTypePassword"

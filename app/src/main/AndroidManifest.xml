@@ -36,10 +36,10 @@
         </activity>
         <activity
             android:name=".Activities.RegisterActivity"
-            android:exported="false" />
+            android:exported="false"  android:theme="@style/NoActionBar"/>
         <activity
             android:name=".Activities.NewCommentActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".Activities.PostDetailsActivity"
             android:exported="false" /> <!-- configuring files for sharing using: https://guides.codepath.org/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher -->
@@ -58,7 +58,7 @@
             android:exported="false" />
         <activity
             android:name=".Activities.LoginActivity"
-            android:exported="true">
+            android:exported="true"  android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
