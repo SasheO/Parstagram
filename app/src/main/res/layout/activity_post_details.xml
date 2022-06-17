@@ -69,10 +69,10 @@
             android:id="@+id/btnLiked"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginLeft="8dp"
             android:background="@null"
             android:scaleType="fitXY"
             android:src="@drawable/ufi_heart"
-            android:layout_marginLeft="8dp"
             android:text="Comment"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -101,14 +101,25 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvComments"
-        android:layout_width="408dp"
-        android:layout_height="378dp"
+        android:layout_width="390dp"
+        android:layout_height="363dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tvLikeCount"
+        android:layout_width="390dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="4dp"
+        android:text="number of likes"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LinearLayout"
-        app:layout_constraintVertical_bias="1.0" />
+        tools:text="number of likes" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

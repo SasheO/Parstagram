@@ -37,6 +37,7 @@ public class PostDetailsActivity extends AppCompatActivity {
     TextView tvPostDescription;
     ImageView ivPostImage;
     ImageButton btnLiked;
+    TextView tvLikeCount;
     ImageButton btnComment;
     RecyclerView rvComments;
     List<Comment> commentList;
@@ -56,6 +57,7 @@ public class PostDetailsActivity extends AppCompatActivity {
         btnComment = findViewById(R.id.btnComment);
         btnLiked = findViewById(R.id.btnLiked);
         rvComments = findViewById(R.id.rvComments);
+        tvLikeCount = findViewById(R.id.tvLikeCount);
 
         Post post = getIntent().getParcelableExtra("post");
         commentList = new ArrayList<>();
@@ -70,6 +72,7 @@ public class PostDetailsActivity extends AppCompatActivity {
 
         tvPostDescription.setText(post.getDescription());
         tvPostUsername.setText(post.getUser().getUsername());
+        tvLikeCount.setText(post.getStringNumLikes());
         ParseFile image = post.getImage();
         if (image != null) {
             Glide.with(PostDetailsActivity.this).load(image.getUrl()).into(ivPostImage);
