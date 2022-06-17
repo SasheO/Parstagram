@@ -67,10 +67,11 @@ public class PostAdapter extends
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
-        public TextView tvPostUsername;
-        public ImageView ivPostImage;
-        public TextView tvPostDescription;
+        private TextView tvPostUsername;
+        private ImageView ivPostImage;
+        private TextView tvPostDescription;
         public ImageView ivProfilePic;
+        public TextView tvLikeCount;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -82,6 +83,7 @@ public class PostAdapter extends
             tvPostDescription = (TextView) itemView.findViewById(R.id.tvPostDescription);
             tvPostUsername = (TextView) itemView.findViewById(R.id.tvPostUsername);
             ivPostImage = (ImageView) itemView.findViewById(R.id.ivPostImage);
+            tvLikeCount = (TextView) itemView.findViewById(R.id.tvLikeCount);
 //            ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
         }
 
@@ -89,6 +91,7 @@ public class PostAdapter extends
             // Bind the post data to the view elements
             tvPostDescription.setText(post.getDescription());
             tvPostUsername.setText(post.getUser().getUsername());
+            tvLikeCount.setText(post.getStringNumLikes());
             ParseFile postimage = post.getImage();
             if (postimage != null) {
                 Glide.with(context).load(postimage.getUrl()).into(ivPostImage);

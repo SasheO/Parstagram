@@ -46,6 +46,14 @@ public class Post extends ParseObject {
         return getList(KEY_LIKEDBY);
     }
 
+    public String getStringNumLikes(){
+        int num_likes = getLikedby().size();
+        if (num_likes == 1){
+           return String.valueOf(num_likes) + " like";
+        }
+        return String.valueOf(num_likes) + " likes";
+    }
+
     public void setDescription(String description){
         put(KEY_DESCRPTION, description);
     }
@@ -60,7 +68,6 @@ public class Post extends ParseObject {
 
     public void updateLikedBy(ParseUser current_user){
         List<ParseUser> likedby = getLikedby();
-        // todo: change this to hassameid
         for (ParseUser user: likedby){
             if (user.hasSameId(current_user)){
                 likedby.remove(user);
