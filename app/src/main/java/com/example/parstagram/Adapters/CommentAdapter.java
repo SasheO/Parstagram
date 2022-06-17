@@ -79,7 +79,7 @@ public class CommentAdapter extends
 
         public void bind(Comment comment) {
             // todo: comment.getUser() returns null object. why?
-            // tvCommentUsername.setText(comment.getUser().getUsername());
+            tvCommentUsername.setText(comment.getUser().getUsername());
             tvCommentBody.setText(comment.getBody());
         }
     }
