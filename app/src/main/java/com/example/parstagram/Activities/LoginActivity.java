@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.parstagram.R;
@@ -21,6 +22,8 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     EditText etTypeUsername;
     EditText etTypePassword;
+    TextView tvSignUp;
+
     String TAG = "LoginActivity";
 
     @Override
@@ -31,13 +34,22 @@ public class LoginActivity extends AppCompatActivity {
         // check if user has already logged in
         if (ParseUser.getCurrentUser() != null){
             // if user is logged in, go directly to main page
-            goToNewPostActivity();
+            goToMainActivity();
         }
 
 
-        btnLogin = findViewById(R.id.btnLogin);
+        btnLogin = findViewById(R.id.btnSignup);
         etTypePassword = findViewById(R.id.etTypePassword);
         etTypeUsername = findViewById(R.id.etTypeUsername);
+        tvSignUp = findViewById(R.id.tvSignUp);
+
+        tvSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                         else
                         {
                             Log.d(TAG, "login successful");
-                            goToNewPostActivity();
+                            goToMainActivity();
                         }
                     }
                 });
@@ -66,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void goToNewPostActivity(){
+    private void goToMainActivity(){
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
     }
