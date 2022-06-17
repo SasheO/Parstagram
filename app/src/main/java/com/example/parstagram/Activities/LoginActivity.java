@@ -81,5 +81,7 @@ public class LoginActivity extends AppCompatActivity {
     private void goToMainActivity(){
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
+        // this is necessary to prevent user from being able to go back to login page by repeatedly clicking back button
+        finish();
     }
 }

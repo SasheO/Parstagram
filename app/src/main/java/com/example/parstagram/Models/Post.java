@@ -66,6 +66,9 @@ public class Post extends ParseObject {
         put(KEY_IMAGE, image);
     }
 
+    public void setLikedby(List<ParseUser> likedby){
+        put(KEY_LIKEDBY, likedby);
+    }
 
     public void updateLikedBy(ParseUser current_user){
         List<ParseUser> likedby = getLikedby();
@@ -78,7 +81,7 @@ public class Post extends ParseObject {
             }
         }
         likedby.add(current_user);
-        put(KEY_LIKEDBY, likedby);
+        setLikedby(likedby);
     }
 
 
