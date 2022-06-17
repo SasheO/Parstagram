@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="3dp"
+    android:layout_marginTop="6dp"
     android:layout_marginBottom="3dp">
+
 
     <TextView
         android:id="@+id/tvPostUsername"
@@ -14,6 +15,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:contentDescription="username of who made post"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="username" />
@@ -33,11 +35,83 @@
         android:id="@+id/tvPostDescription"
         android:layout_width="388dp"
         android:layout_height="21dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="4dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/tvPostUsername"
         app:layout_constraintHorizontal_bias="0.003"
         app:layout_constraintStart_toStartOf="@+id/tvPostUsername"
-        app:layout_constraintTop_toBottomOf="@+id/ivPostImage"
+        app:layout_constraintTop_toBottomOf="@+id/tvLikeCount"
         tools:text="post description appears here" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="386dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/tvPostDescription"
+        app:layout_constraintStart_toStartOf="@+id/tvPostDescription"
+        app:layout_constraintTop_toBottomOf="@+id/ivPostImage">
+
+        <ImageButton
+            android:id="@+id/btnLiked2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="8dp"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/ufi_heart"
+            android:text="Comment"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.02"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvPostDescription"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageButton
+            android:id="@+id/btnComment2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/ufi_comment"
+            android:text="Comment"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.02"
+            app:layout_constraintStart_toEndOf="@id/btnLiked"
+            app:layout_constraintTop_toTopOf="@+id/tvPostDescription"
+            app:layout_constraintVertical_bias="0.0"
+            tools:src="@drawable/ufi_comment" />
+
+        <ImageButton
+            android:id="@+id/btnSend"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/direct"
+            android:text="Comment"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.02"
+            app:layout_constraintStart_toEndOf="@id/btnLiked"
+            app:layout_constraintTop_toTopOf="@+id/tvPostDescription"
+            app:layout_constraintVertical_bias="0.0"
+            tools:src="@drawable/direct" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvLikeCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="326dp"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:text="like count" />
 </androidx.constraintlayout.widget.ConstraintLayout>
