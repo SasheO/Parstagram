@@ -83,7 +83,8 @@ public class PostDetailsActivity extends AppCompatActivity {
         String timeAgo = Post.calculateTimeAgo(createdAt);
         tvTimestamp.setText(timeAgo);
 
-// todo: 3. Ensure that if a post has been liked by a user, it shows on opening a post details activity
+
+        // todo: 3. Ensure that if a post has been liked by a user, it shows on opening a post details activity
         for (ParseUser user: post.getLikedby()){
             if (user.hasSameId(CURRENT_USER)){
                 btnLiked.setImageResource(R.drawable.ufi_heart_active);
@@ -102,15 +103,16 @@ public class PostDetailsActivity extends AppCompatActivity {
         btnLiked.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // if current user has already liked this post
-                if (post.getLikedby().contains(CURRENT_USER)){
-                    btnLiked.setImageResource(R.drawable.ufi_heart);
-                }
-                // else add them to likedby list and like the buttonimage
-                else{
-                    btnLiked.setImageResource(R.drawable.ufi_heart_active);
+                // always like post first
+                btnLiked.setImageResource(R.drawable.ufi_heart_active);
+                // unlike post if user has already liked it
+                for (ParseUser user: post.getLikedby()){
+                    if (user.hasSameId(CURRENT_USER)){
+                        btnLiked.setImageResource(R.drawable.ufi_heart);
+                    }
                 }
                 post.updateLikedBy(CURRENT_USER);
+
                 post.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
@@ -120,6 +122,7 @@ public class PostDetailsActivity extends AppCompatActivity {
 
                     }
                 });
+
             }
         });
     }

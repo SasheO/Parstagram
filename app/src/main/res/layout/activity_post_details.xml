@@ -67,10 +67,12 @@
 
         <ImageButton
             android:id="@+id/btnLiked"
-            android:layout_width="48dp"
-            android:layout_height="45dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@null"
             android:scaleType="fitXY"
             android:src="@drawable/ufi_heart"
+            android:layout_marginLeft="8dp"
             android:text="Comment"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -81,9 +83,10 @@
 
         <ImageButton
             android:id="@+id/btnComment"
-            android:layout_width="48dp"
-            android:layout_height="45dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="15dp"
+            android:background="@null"
             android:scaleType="fitXY"
             android:src="@drawable/ufi_comment"
             android:text="Comment"
