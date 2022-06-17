@@ -1,15 +1,14 @@
-package com.example.parstagram.Fragments;
+package com.example.parstagram.Activities;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.parstagram.Adapters.ProfilePostAdapter;
 import com.example.parstagram.Models.Post;
@@ -22,41 +21,36 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CurrentUserProfileFragment extends Fragment {
+public class OtherUserProfileActivity extends AppCompatActivity {
 
-    public static final String TAG = "ProfileFragment";
+    ImageView ivProfilePicture;
+    TextView tvUsername;
     RecyclerView rvProfilePosts;
     private List<Post> postList;
     ProfilePostAdapter adapter;
-    TextView tvUsername;
+    public static final String TAG = "OtherUserProfileActivity";
 
-    // required empty constructor
-    public CurrentUserProfileFragment(){}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_current_user_profile, parent, false);
-    }
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_other_user_profile);
 
-    // This event is triggered soon after onCreateView().
-    // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        ivProfilePicture = findViewById(R.id.ivProfilePicture);
+        tvUsername = findViewById(R.id.tvUsername);
+        rvProfilePosts = findViewById(R.id.rvProfilePosts);
+        Post post = getIntent().getParcelableExtra("post");
 
+        tvUsername.setText(post.getUser().getUsername());
         postList = new ArrayList<>();
-        rvProfilePosts = view.findViewById(R.id.rvProfilePosts);
-        tvUsername = view.findViewById(R.id.tvUsername);
-        tvUsername.setText(ParseUser.getCurrentUser().getUsername());
-        adapter = new ProfilePostAdapter(getActivity(), postList);
 
+        adapter = new ProfilePostAdapter(OtherUserProfileActivity.this, postList);
         // set the adapter on the recycler view
         rvProfilePosts.setAdapter(adapter);
-        // set the layout manager on the recycler view as a grid
-        rvProfilePosts.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        // set the layout manager on the recycler view
+        rvProfilePosts.setLayoutManager(new LinearLayoutManager(OtherUserProfileActivity.this));
         // query posts from Parstagram
-        queryUserPosts(ParseUser.getCurrentUser());
+        queryUserPosts(post.getUser());
     }
 
     private void queryUserPosts(ParseUser user) {
@@ -70,17 +64,16 @@ public class CurrentUserProfileFragment extends Fragment {
         query.addDescendingOrder("createdAt");
         // start an asynchronous call for posts
         query.findInBackground(new FindCallback<Post>() {
+            @SuppressLint("LongLogTag")
             @Override
             public void done(List<Post> posts, ParseException e) {
                 if (e != null){
-                    Log.e(TAG, "error retrieving posts " + e.toString());
+                    Log.e(TAG, "error retrieving posts: " + e.toString());
                 }
                 else{
                     // then getting posts from the database was successful\
                     // log the description of each post
-                    for (Post post : posts){
-                        Log.i(TAG, "post description:" + post.getDescription().toString());
-                    }
+
                     adapter.clear();
                     postList.addAll(posts);
                     adapter.notifyDataSetChanged();

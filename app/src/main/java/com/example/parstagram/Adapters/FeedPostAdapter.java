@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.parstagram.Activities.MainActivity;
+import com.example.parstagram.Activities.OtherUserProfileActivity;
 import com.example.parstagram.Activities.PostDetailsActivity;
 import com.example.parstagram.Models.Post;
 import com.example.parstagram.R;
@@ -118,17 +119,18 @@ public class FeedPostAdapter extends
                 @Override
                 public void onClick(View v) {
                     if (post.getUser().hasSameId(ParseUser.getCurrentUser())){
-                        Log.i(TAG, "user profile photo clicked is current user");
-                        // go to the profile tab. i got this line of code from stack overflow: https://stackoverflow.com/questions/12142255/call-activity-method-from-adapter
+                        // since the profile clicked on is that of the logged in user, just go to their profile tab
+                        // i got the block of code below from stack overflow: https://stackoverflow.com/questions/12142255/call-activity-method-from-adapter
                         if (context instanceof MainActivity) {
-                            Log.i(TAG, "launching profile fragment");
                             ((MainActivity)context).launchProfileFragment();
                         }
                     }
                     else{
                         // launch an intent to a profile of the user
+                        Intent intent = new Intent(context, OtherUserProfileActivity.class);
+                        intent.putExtra("post", post);
+                        context.startActivity(intent);
                     }
-//                    Toast.makeText(context, "This profile was clicked", Toast.LENGTH_LONG).show();
                 }
             });
         }
