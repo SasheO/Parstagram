@@ -1,6 +1,8 @@
 package com.example.parstagram.Fragments;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -22,6 +24,7 @@ import com.example.parstagram.Models.Post;
 import com.example.parstagram.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -96,6 +99,7 @@ public class NewPostFragment extends Fragment {
             ParseUser curr_user = ParseUser.getCurrentUser();
             newPost.setUser(curr_user);
             newPost.setDescription(description);
+            todo: newPost.setImage(new ParseFile(photoFile));
 
             // save new post to server
             newPost.saveInBackground(new SaveCallback() {
@@ -160,23 +164,23 @@ public class NewPostFragment extends Fragment {
     }
 
     // todo: find out how to return file image to fragment after camera is opened and closed
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
-//            if (resultCode == RESULT_OK) {
-//                // by this point we have the camera photo on disk
-//                Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-//                // RESIZE BITMAP, see section below
-//                // Load the taken image into a preview
-//                ImageView ivPreview = (ImageView) findViewById(R.id.ivPicturePreview);
-//                ivPreview.setImageBitmap(takenImage);
-//                ivPreview.setVisibility(View.VISIBLE);
-//            } else { // Result was a failure
-//                Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == getActivity().RESULT_OK) {
+                // by this point we have the camera photo on disk
+                Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                // RESIZE BITMAP, see section below
+                // Load the taken image into a preview
+                ImageView ivPreview = (ImageView) getView().findViewById(R.id.ivPicturePreview);
+                ivPreview.setImageBitmap(takenImage);
+                ivPreview.setVisibility(View.VISIBLE);
+            } else { // Result was a failure
+                Toast.makeText(getContext(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
 
 

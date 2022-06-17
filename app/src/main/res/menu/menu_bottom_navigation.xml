@@ -17,7 +17,7 @@
         android:id="@+id/actionViewProfile"
         android:enabled="true"
         android:icon="@drawable/instagram_user_filled_24"
-        android:title="New Post"
+        android:title="Profile"
         app:showAsAction="ifRoom" />
 
 </menu>
