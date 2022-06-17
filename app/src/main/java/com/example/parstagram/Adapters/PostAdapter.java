@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.parstagram.Activities.PostDetailsActivity;
 import com.example.parstagram.Models.Post;
 import com.example.parstagram.R;
@@ -70,7 +71,7 @@ public class PostAdapter extends
         private TextView tvPostUsername;
         private ImageView ivPostImage;
         private TextView tvPostDescription;
-        public ImageView ivProfilePic;
+        public ImageView ivUserProfilePic;
         public TextView tvLikeCount;
 
         // We also create a constructor that accepts the entire item row
@@ -84,7 +85,7 @@ public class PostAdapter extends
             tvPostUsername = (TextView) itemView.findViewById(R.id.tvPostUsername);
             ivPostImage = (ImageView) itemView.findViewById(R.id.ivPostImage);
             tvLikeCount = (TextView) itemView.findViewById(R.id.tvLikeCount);
-//            ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
+            ivUserProfilePic = (ImageView) itemView.findViewById(R.id.ivUserProfilePic);
         }
 
         private void bind(Post post) {
@@ -99,6 +100,13 @@ public class PostAdapter extends
             else{
                 ivPostImage.setVisibility(View.GONE);
             }
+            ParseFile profilepic = post.getUser().getParseFile("ProfilePic");
+            if (profilepic != null){
+                Glide.with(context).load(profilepic.getUrl()).transform(new CircleCrop()).into(ivUserProfilePic);
+            }
+
+
+
             // todo: if there is a user profile pic, bind the profile pic to ivprofilepic
         }
 

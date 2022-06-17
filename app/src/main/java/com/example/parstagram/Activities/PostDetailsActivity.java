@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.parstagram.Adapters.CommentAdapter;
 import com.example.parstagram.Adapters.PostAdapter;
 import com.example.parstagram.Models.Comment;
@@ -38,6 +39,7 @@ public class PostDetailsActivity extends AppCompatActivity {
     ImageView ivPostImage;
     ImageButton btnLiked;
     TextView tvLikeCount;
+    ImageView ivProfilePic;
     ImageButton btnComment;
     RecyclerView rvComments;
     List<Comment> commentList;
@@ -58,6 +60,7 @@ public class PostDetailsActivity extends AppCompatActivity {
         btnLiked = findViewById(R.id.btnLiked);
         rvComments = findViewById(R.id.rvComments);
         tvLikeCount = findViewById(R.id.tvLikeCount);
+        ivProfilePic = findViewById(R.id.ivProfilePic);
 
         Post post = getIntent().getParcelableExtra("post");
         commentList = new ArrayList<>();
@@ -79,6 +82,10 @@ public class PostDetailsActivity extends AppCompatActivity {
         }
         else{
             ivPostImage.setVisibility(View.GONE);
+        }
+        ParseFile profilepic = post.getUser().getParseFile("ProfilePic");
+        if (profilepic != null){
+            Glide.with(PostDetailsActivity.this).load(profilepic.getUrl()).transform(new CircleCrop()).into(ivProfilePic);
         }
 
 

@@ -14,7 +14,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:contentDescription="username of who made post"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivProfilePic"
+
         app:layout_constraintTop_toTopOf="parent"
         tools:text="username" />
 
@@ -22,11 +24,12 @@
         android:id="@+id/ivPostImage"
         android:layout_width="388dp"
         android:layout_height="237dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvPostUsername"
-        app:layout_constraintTop_toBottomOf="@+id/tvPostUsername"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/ivProfilePic"
+        app:layout_constraintStart_toStartOf="@+id/ivProfilePic"
+        app:layout_constraintTop_toBottomOf="@+id/ivProfilePic"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
@@ -38,7 +41,7 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/ivPostImage"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/tvPostUsername"
+        app:layout_constraintStart_toStartOf="@+id/ivProfilePic"
         app:layout_constraintTop_toBottomOf="@+id/ivPostImage"
         tools:text="post description appears here" />
 
@@ -101,25 +104,33 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvComments"
-        android:layout_width="390dp"
-        android:layout_height="363dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="406dp"
+        android:layout_height="348dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvPostDescription"
+        app:layout_constraintTop_toBottomOf="@+id/tvLikeCount" />
 
     <TextView
         android:id="@+id/tvLikeCount"
-        android:layout_width="390dp"
+        android:layout_width="369dp"
         android:layout_height="21dp"
         android:layout_marginTop="4dp"
         android:text="number of likes"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LinearLayout"
         tools:text="number of likes" />
+
+    <ImageView
+        android:id="@+id/ivProfilePic"
+        android:layout_width="50dp"
+        android:layout_height="43dp"
+        app:srcCompat="@drawable/instagram_user_filled_24"
+        tools:layout_editor_absoluteX="4dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
