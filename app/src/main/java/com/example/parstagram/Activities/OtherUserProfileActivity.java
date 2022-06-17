@@ -41,6 +41,7 @@ public class OtherUserProfileActivity extends AppCompatActivity {
         rvProfilePosts = findViewById(R.id.rvProfilePosts);
         Post post = getIntent().getParcelableExtra("post");
 
+        tvUsername.setText(post.getUser().getUsername());
         postList = new ArrayList<>();
 
         adapter = new ProfilePostAdapter(OtherUserProfileActivity.this, postList);
