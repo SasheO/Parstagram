@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.parstagram.Adapters.CommentAdapter;
@@ -83,12 +84,12 @@ public class PostDetailsActivity extends AppCompatActivity {
         String timeAgo = Post.calculateTimeAgo(createdAt);
         tvTimestamp.setText(timeAgo);
 
-
         // todo: 3. Ensure that if a post has been liked by a user, it shows on opening a post details activity
-        for (ParseUser user: post.getLikedby()){
-            if (user.hasSameId(CURRENT_USER)){
-                btnLiked.setImageResource(R.drawable.ufi_heart_active);
-            }
+        if (post.isLikedBy(CURRENT_USER)){
+            btnLiked.setImageResource(R.drawable.ufi_heart_active);
+        }
+        else {
+            btnLiked.setImageResource(R.drawable.ufi_heart);
         }
 
         btnComment.setOnClickListener(new View.OnClickListener() {
@@ -103,25 +104,45 @@ public class PostDetailsActivity extends AppCompatActivity {
         btnLiked.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // always like post first
-                btnLiked.setImageResource(R.drawable.ufi_heart_active);
-                // unlike post if user has already liked it
-                for (ParseUser user: post.getLikedby()){
-                    if (user.hasSameId(CURRENT_USER)){
-                        btnLiked.setImageResource(R.drawable.ufi_heart);
-                    }
+
+                if (post.isLikedBy(CURRENT_USER)){
+                    btnLiked.setImageResource(R.drawable.ufi_heart);
+
+                }
+                else {
+                    btnLiked.setImageResource(R.drawable.ufi_heart_active);
                 }
                 post.updateLikedBy(CURRENT_USER);
-
                 post.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
-                        if (e != null){
-                            Log.e(TAG, "error liking image: " + e.toString());
+                        if (e!=null){
+                            Log.e(TAG, "error liking/unliking image");
+                            Toast.makeText(PostDetailsActivity.this, "Was not able to update like", Toast.LENGTH_LONG).show();
                         }
-
                     }
                 });
+
+
+//                // always like post first
+//                btnLiked.setImageResource(R.drawable.ufi_heart_active);
+//                // unlike post if user has already liked it
+//                for (ParseUser user: post.getLikedby()){
+//                    if (user.hasSameId(CURRENT_USER)){
+//                        btnLiked.setImageResource(R.drawable.ufi_heart);
+//                    }
+//                }
+//                post.updateLikedBy(CURRENT_USER);
+//
+//                post.saveInBackground(new SaveCallback() {
+//                    @Override
+//                    public void done(ParseException e) {
+//                        if (e != null){
+//                            Log.e(TAG, "error liking image: " + e.toString());
+//                        }
+//
+//                    }
+//                });
 
             }
         });
