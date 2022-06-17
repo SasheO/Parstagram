@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.parstagram.Adapters.CommentAdapter;
 import com.example.parstagram.Adapters.PostAdapter;
 import com.example.parstagram.Models.Comment;
@@ -38,6 +39,7 @@ public class PostDetailsActivity extends AppCompatActivity {
     ImageView ivPostImage;
     ImageButton btnLiked;
     TextView tvLikeCount;
+    ImageView ivProfilePic;
     ImageButton btnComment;
     RecyclerView rvComments;
     List<Comment> commentList;
@@ -58,6 +60,7 @@ public class PostDetailsActivity extends AppCompatActivity {
         btnLiked = findViewById(R.id.btnLiked);
         rvComments = findViewById(R.id.rvComments);
         tvLikeCount = findViewById(R.id.tvLikeCount);
+        ivProfilePic = findViewById(R.id.ivProfilePic);
 
         Post post = getIntent().getParcelableExtra("post");
         commentList = new ArrayList<>();
@@ -80,6 +83,10 @@ public class PostDetailsActivity extends AppCompatActivity {
         else{
             ivPostImage.setVisibility(View.GONE);
         }
+        ParseFile profilepic = post.getUser().getParseFile("ProfilePic");
+        if (profilepic != null){
+            Glide.with(PostDetailsActivity.this).load(profilepic.getUrl()).transform(new CircleCrop()).into(ivProfilePic);
+        }
 
 
 
@@ -87,7 +94,7 @@ public class PostDetailsActivity extends AppCompatActivity {
         String timeAgo = Post.calculateTimeAgo(createdAt);
         tvTimestamp.setText(timeAgo);
 
-        // todo: 3. Ensure that if a post has been liked by a user, it shows on opening a post details activity
+        // if a post has been liked by a user, it shows on opening a post details activity
         if (post.isLikedBy(CURRENT_USER)){
             btnLiked.setImageResource(R.drawable.ufi_heart_active);
         }
@@ -104,6 +111,7 @@ public class PostDetailsActivity extends AppCompatActivity {
             }
         });
 
+        // todo: ensure that likes update locally so if you like sth, you don't have to refresh to see it reflected
         btnLiked.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,27 +133,6 @@ public class PostDetailsActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
-//                // always like post first
-//                btnLiked.setImageResource(R.drawable.ufi_heart_active);
-//                // unlike post if user has already liked it
-//                for (ParseUser user: post.getLikedby()){
-//                    if (user.hasSameId(CURRENT_USER)){
-//                        btnLiked.setImageResource(R.drawable.ufi_heart);
-//                    }
-//                }
-//                post.updateLikedBy(CURRENT_USER);
-//
-//                post.saveInBackground(new SaveCallback() {
-//                    @Override
-//                    public void done(ParseException e) {
-//                        if (e != null){
-//                            Log.e(TAG, "error liking image: " + e.toString());
-//                        }
-//
-//                    }
-//                });
 
             }
         });

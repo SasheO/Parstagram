@@ -12,20 +12,22 @@
         android:id="@+id/tvPostUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="16dp"
         android:contentDescription="username of who made post"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/ivUserProfilePic"
+        app:layout_constraintStart_toEndOf="@+id/ivUserProfilePic"
+        app:layout_constraintTop_toTopOf="@+id/ivUserProfilePic"
+        app:layout_constraintVertical_bias="1.0"
         tools:text="username" />
 
     <ImageView
         android:id="@+id/ivPostImage"
-        android:layout_width="409dp"
-        android:layout_height="237dp"
+        android:layout_width="353dp"
+        android:layout_height="235dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.068"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPostUsername"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
@@ -38,7 +40,7 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/tvPostUsername"
         app:layout_constraintHorizontal_bias="0.003"
-        app:layout_constraintStart_toStartOf="@+id/tvPostUsername"
+        app:layout_constraintStart_toStartOf="@+id/ivUserProfilePic"
         app:layout_constraintTop_toBottomOf="@+id/tvLikeCount"
         tools:text="post description appears here" />
 
@@ -115,4 +117,14 @@
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         tools:text="number of likes" />
+
+    <ImageView
+        android:id="@+id/ivUserProfilePic"
+        android:layout_width="32dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/instagram_user_outline_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>

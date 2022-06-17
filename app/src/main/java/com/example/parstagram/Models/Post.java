@@ -66,6 +66,7 @@ public class Post extends ParseObject {
         put(KEY_IMAGE, image);
     }
 
+
     public void updateLikedBy(ParseUser current_user){
         List<ParseUser> likedby = getLikedby();
         for (ParseUser user: likedby){
