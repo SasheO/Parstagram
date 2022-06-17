@@ -23,6 +23,7 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -76,18 +77,18 @@ public class PostDetailsActivity extends AppCompatActivity {
             ivPostImage.setVisibility(View.GONE);
         }
 
-        // todo: 2. Ensure that if a post has been liked by a user, it shows on opening a post details activity
-        if (post.getLikedby().contains(CURRENT_USER)){
-            // set liked by to filled
-            Log.i(TAG, "post already liked by current user");
-            btnLiked.setImageResource(R.drawable.ufi_heart_active);
-        }
+
 
         Date createdAt = post.getCreatedAt();
         String timeAgo = Post.calculateTimeAgo(createdAt);
         tvTimestamp.setText(timeAgo);
 
-
+// todo: 3. Ensure that if a post has been liked by a user, it shows on opening a post details activity
+        for (ParseUser user: post.getLikedby()){
+            if (user.hasSameId(CURRENT_USER)){
+                btnLiked.setImageResource(R.drawable.ufi_heart_active);
+            }
+        }
 
         btnComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +111,15 @@ public class PostDetailsActivity extends AppCompatActivity {
                     btnLiked.setImageResource(R.drawable.ufi_heart_active);
                 }
                 post.updateLikedBy(CURRENT_USER);
+                post.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e != null){
+                            Log.e(TAG, "error liking image: " + e.toString());
+                        }
+
+                    }
+                });
             }
         });
     }

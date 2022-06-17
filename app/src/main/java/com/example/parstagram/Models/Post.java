@@ -58,7 +58,7 @@ public class Post extends ParseObject {
 
     public void updateLikedBy(ParseUser current_user){
         List<ParseUser> likedby = getLikedby();
-        // if likedBy contains current user, remove them
+        // todo: change this to hassameid
         if (likedby.contains(current_user)){
             likedby.remove(current_user);
         }
@@ -66,6 +66,7 @@ public class Post extends ParseObject {
             likedby.add(current_user);
         }
         put(KEY_LIKEDBY, likedby);
+        Log.i(TAG, "liked by "+ getLikedby().toString());
     }
 
     public static String calculateTimeAgo(Date createdAt) {
