@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         if (ParseUser.getCurrentUser() != null){
             // if user is logged in, go directly to main page
             goToMainActivity();
+            finish();
         }
 
 
